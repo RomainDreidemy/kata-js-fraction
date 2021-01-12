@@ -1,0 +1,142 @@
+{
+  "editor.formatOnSave": true,
+  "iife": {
+    "prefix": "iife",
+    "body": [
+      "(function() {",
+      "",
+      "})()"
+    ],
+    "description": "Immediatly Invoked Function Expression"
+  },
+  "Jest describe": {
+    "prefix": "jest-describe",
+    "body": [
+      "describe(\"Test suite\", function() {",
+      "    ",
+      "})",
+      ""
+    ],
+    "description": "Jest test suite"
+  },
+  "Jest test": {
+    "prefix": "jest-test",
+    "body": [
+      "it(\"\", function() {",
+      "  // GIVEN",
+      "",
+      "  // WHEN",
+      "  const actual: ${2:number} = ${1:functionUnderTest}();",
+      "",
+      "  // THEN",
+      "  const expected: ${2:number} = 0;",
+      "  expect(actual).toEqual(expected);",
+      "});",
+      ""
+    ],
+    "description": "Jest test"
+  },
+  "Jest asynchronous test": {
+    "prefix": "jest-test-async",
+    "body": [
+      "it(\"\", async function() {",
+      "  // GIVEN",
+      "",
+      "  // WHEN",
+      "  const actual: ${2:number} = await ${1:functionUnderTest}();",
+      "",
+      "  // THEN",
+      "  const expected: ${2:number} = 0;",
+      "  expect(actual).toEqual(expected);",
+      "});",
+      ""
+    ],
+    "description": "Jest async test"
+  },
+  "React Redux connect component": {
+    "prefix": "react-redux-connect",
+    "body": [
+      "import { connect } from \"react-redux\";",
+      "import { ExtendedDispatch as Dispatch } from \"business/definitions\";",
+      "import { ApplicationState } from \"business/state\";",
+      "import { publicApi } from \"business\";",
+      "import { ${1:ComponentName} as Component, OwnProps, StateProps, DispatchProps } from \"./${1:ComponentName}\";",
+      "",
+      "function mapStateToProps(state: ApplicationState, ownProps: OwnProps): StateProps {",
+      "  return {};",
+      "}",
+      "",
+      "function mapDispatchToProps(dispatch: Dispatch, ownProps: OwnProps): DispatchProps {",
+      "  return {};",
+      "}",
+      "",
+      "export const ${1:ComponentName} = connect<StateProps, DispatchProps, OwnProps, ApplicationState>(",
+      "  mapStateToProps,",
+      "  mapDispatchToProps",
+      ")(Component);"
+    ],
+    "description": "React Redux: connect component"
+  },
+  "Redux action and action creator": {
+    "prefix": "redux-action",
+    "body": [
+      "interface ${1:ActionName} extends Action {",
+      "  type: \"${2:ACTION_TYPE}\";",
+      "}",
+      "",
+      "function create${1:ActionName}(): ${1:ActionName} {",
+      "  return {",
+      "    type: \"${2:ACTION_TYPE}\"",
+      "  };",
+      "}"
+    ],
+    "description": "Redux: action and action creator"
+  },
+  "Redux thunk": {
+    "prefix": "redux-thunk",
+    "body": [
+      "import { Thunk, ExtendedDispatch as Dispatch, ExtraArgument } from \"business/definitions\";",
+      "import { ApplicationState } from \"business/state\";",
+      "",
+      "export function create${1:ThunkName}Thunk(): Thunk<void> {",
+      "  return async (",
+      "    dispatch: Dispatch,",
+      "    getState: () => ApplicationState,",
+      "    {  }: ExtraArgument",
+      "  ) => {",
+      "    const state: ApplicationState = getState();",
+      "  };",
+      "}"
+    ],
+    "description": "Redux thunk creator"
+  },
+  "Redux thunk test": {
+    "prefix": "redux-thunk-test",
+    "body": [
+      "import { mockStore } from \"util/mockStore\";",
+      "import { mockObject } from \"util/mockObject\";",
+      "import { RecursivePartial } from \"util/recursivePartial\";",
+      "import { Thunk, ExtraArgument } from \"business/definitions\";",
+      "import { ApplicationState } from \"business/state\";",
+      "import { create${1:ThunkName}Thunk } from \"./thunks\";",
+      "describe(\"Test of create${1:ThunkName}Thunk()\", () => {",
+      "it(\"\", async () => {",
+      "    // GIVEN",
+      "    const extraArgument: RecursivePartial<ExtraArgument> = {};",
+      "    const initialState = mockObject<ApplicationState>();",
+      "    const store = mockStore(extraArgument, initialState);",
+      "",
+      "    // WHEN",
+      "    const thunk: Thunk<void> = create${1:ThunkName}Thunk();",
+      "    await store.dispatch(thunk);",
+      "",
+      "    // THEN",
+      "    const actualActions = store.getActions();",
+      "    const expectedActions = [];",
+      "    expect(actualActions).toEqual(expectedActions);",
+      "  });",
+      "});"
+    ],
+    "description": "Test of a thunk creator"
+  }
+}
